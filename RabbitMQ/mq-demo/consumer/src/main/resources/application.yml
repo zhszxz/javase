@@ -1,0 +1,23 @@
+logging:
+  pattern:
+    dateformat: MM-dd HH:mm:ss:SSS
+spring:
+  rabbitmq:
+    host: 192.168.124.40
+    port: 5672
+    virtual-host: /hmall
+    username: hmall
+    password: 739627
+    listener:
+      simple:
+        prefetch: 1 #每个消费者在处理并确认当前消息之前，只会从队列中获取一条消息
+        #消费者确认机制，none：不开启，消息投递给消费者，直接返回ack，消息从队列中删除
+        #auto：由spring自动决定返回ack，nack或reject
+        #manual:手动发送确认
+        acknowledge-mode: auto
+        retry:
+          enabled: true #开启消费者处理消息异常的本地重试机制
+          initial-interval: 1000ms #初始失败等待时长
+          multiplier: 1 #下次失败等待时长的倍数
+          max-attempts: 3 #最大重试次数
+          stateless: true #无状态，若业务中含有事务，应为false

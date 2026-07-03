@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<a th:href="@{/user}">查询所有用户信息</a><br>
+
+<a th:href="@{/user/1}">根据id查询用户信息</a><br>
+
+<form th:action="@{/user}" method="post">
+    用户名：<input type="text" name="username"><br>
+    密码：<input type="password" name="password"><br>
+    <input type="submit" value="添加"><br>
+</form>
+<!--利用HiddenHttpMethodFilter来发送put和delete请求，该filter会把post请求的请求方式替换为_method属性值的大写-->
+<form th:action="@{/user}" method="post">
+    <input type="hidden" name="_method" value="put">
+    用户名：<input type="text" name="username"><br>
+    密码：<input type="password" name="password"><br>
+    <input type="submit" value="修改"><br>
+</form>
+
+<a th:href="@{/user/1}">根据id删除用户信息</a><br>
+
+
+</body>
+</html>

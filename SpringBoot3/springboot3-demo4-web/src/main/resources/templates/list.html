@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>列表</title>
+</head>
+<body>
+<table>
+    <tr>
+        <th>id</th>
+        <th>姓名</th>
+        <th>邮箱</th>
+        <th>年龄</th>
+        <th>角色</th>
+        <th>状态</th>
+    </tr>
+    <tr th:each="person,stats : ${persons}">
+        <td th:text="${person.id}"></td>
+        <td th:text="${person.userName}"></td>
+        <td th:text="${person.email}"></td>
+        <td th:text="|${person.age}-${person.age>17 ?'成年':'未成年'}|"></td>
+        <td th:switch="${person.role}">
+            <button th:case="'admin'" type="button" >管理员</button>
+            <button th:case="'pm'" type="button" >项目经理</button>
+            <button th:case="'hr'" type="button" >人事</button>
+        </td>
+        <td>
+            index: [[${stats.index}]] <br/>
+            count: [[${stats.count}]] <br/>
+            size（总数量）: [[${stats.size}]] <br/>
+            current(当前对象): [[${stats.current}]] <br/>
+            even(true)/odd(false): [[${stats.even}]] <br/>
+            first: [[${stats.first}]] <br/>
+            last: [[${stats.last}]] <br/>
+        </td>
+
+    </tr>
+</table>
+
+</body>
+</html>

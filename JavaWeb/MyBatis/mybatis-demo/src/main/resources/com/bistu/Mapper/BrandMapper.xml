@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bistu.Mapper.BrandMapper">
+    <!--    数据库表字段名与实体类属性名不一致则不能自动封装-->
+    <!--    解决方案：-->
+    <!--    1.起别名：在sql中取别名，让别名和属性一致-->
+    <!--    2.提取sql片段并引用-->
+    <!--    sql片段缺点：不够灵活-->
+    <!--    最终方案：建立数据表字段名与实体类属性名的一一映射-->
+    <resultMap id="brandResultMap" type="com.bistu.pojo.Brand">
+        <result column="brand_name" property="brandName"/>
+        <result column="company_name" property="companyName"/>
+    </resultMap>
+
+    <select id="selectAll" resultMap="brandResultMap">
+        select * from tb_brand;
+    </select>
+    <!--    <sql id="brand_column">-->
+    <!--        id, brand_name brandName, company_name companyName, ordered, description, status-->
+    <!--    </sql>-->
+    <!--    <select id="selectAll" resultType="com.bistu.pojo.Brand">-->
+    <!--        select-->
+    <!--        <include refid="brand_column"></include>-->
+    <!--        from tb_brand;-->
+    <!--    </select>-->
+
+    <select id="selectById" resultMap="brandResultMap">
+        <!--参数占位符-->
+        <!--1.#{}:会替换为？，可以防止sql注入;-->
+        <!--2.${}:直接拼接sql，会存在sql注入;-->
+        select * from tb_brand where id=#{id};
+    </select>
+
+    <!--    <select id="selectByCondition" resultMap="brandResultMap">-->
+    <!--        select * from tb_brand where-->
+    <!--        status=#{status} and company_name like #{companyName} and brand_name like #{brandName};-->
+    <!--    </select>-->
+
+    <!--动态sql-->
+    <select id="selectByCondition" resultMap="brandResultMap">
+        select * from tb_brand
+        <where>
+            <!--        test后写逻辑表达式，为真才加上下面的sql语句-->
+            <if test="status!=null">
+                and status=#{status}
+            </if>
+            <if test="companyName!=null and companyName!=''">
+                and company_name like #{companyName}
+            </if>
+            <if test="brandName!=null and brandName!=''">
+                and brand_name like #{brandName}
+            </if>
+        </where>
+
+    </select>
+
+    <!--    单条件动态sql-->
+    <select id="selectByConditionSingle" resultMap="brandResultMap">
+        select * from tb_brand where
+        <!--相当于switch-->
+        <choose>
+            <!--相当于case-->
+            <when test="status!=null">
+                status=#{status}
+            </when>
+            <when test="companyName!=null and companyName!=''">
+                company_name like #{companyName}
+            </when>
+            <when test="brandName!=null and brandName!=''">
+                brand_name like #{brandName}
+            </when>
+            <!--相当于default-->
+            <otherwise>
+                1=1
+            </otherwise>
+        </choose>
+    </select>
+    <!--    插入的sql，设置了主键返回-->
+    <insert id="add" useGeneratedKeys="true" keyProperty="id">
+        insert into tb_brand (brand_name, company_name, ordered, description, status) values
+        (#{brandName},#{companyName},#{ordered},#{description},#{status});
+    </insert>
+
+    <update id="update">
+        update tb_brand
+        <set>
+            <if test="brandName!=null and brandName!=''">
+                brand_name=#{brandName},
+            </if>
+            <if test="companyName!=null and companyName!=''">
+                company_name=#{companyName},
+            </if>
+            <if test="ordered!=null">
+                ordered=#{ordered},
+            </if>
+            <if test="description!=null and description!=''">
+                description=#{description},
+            </if>
+            <if test="status!=null">
+                status=#{status}
+            </if>
+        </set>
+        where id=#{id};
+    </update>
+
+    <delete id="deleteById">
+        delete from tb_brand where id=#{id};
+    </delete>
+    <!--    mybatis会把数组参数封装为map集合，键为array，值为数组-->
+    <delete id="deleteByIds">
+        delete from tb_brand where id in
+        <foreach collection="array" item="id" separator="," open="(" close=");">
+            #{id}
+        </foreach>
+    </delete>
+
+</mapper>

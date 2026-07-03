@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="utf-8"/>
+    <title>狂神说Java-ES仿京东实战</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}"/>
+
+    <!-- ✅ 删除本地依赖，保留 jQuery -->
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"></script>
+
+    <!-- ✅ Vue2 CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.7.16/dist/vue.min.js"></script>
+
+    <!-- ✅ Axios CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/axios@1.7.2/dist/axios.min.js"></script>
+</head>
+
+<body class="pg">
+<div class="page" id="app">
+    <div id="mallPage" class="mallist tmall-page-not-market">
+
+        <!-- 头部搜索 -->
+        <div id="header" class="header-list-app">
+            <div class="headerLayout">
+                <div class="headerCon ">
+                    <h1 id="mallLogo">
+                        <img th:src="@{/images/jdlogo.png}" alt="Logo">
+                    </h1>
+
+                    <div class="header-extra">
+                        <div id="mallSearch" class="mall-search">
+                            <form name="searchTop" class="mallSearch-form clearfix">
+                                <fieldset>
+                                    <legend>搜索</legend>
+                                    <div class="mallSearch-input clearfix">
+                                        <div class="s-combobox-input-wrap">
+                                            <input v-model="keyword" type="text" autocomplete="off" id="mq"
+                                                   class="s-combobox-input" placeholder="请输入搜索关键词">
+                                        </div>
+                                        <button type="submit" @click.prevent="searchKey" id="searchbtn">搜索</button>
+                                    </div>
+                                </fieldset>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 商品详情页面 -->
+        <div id="content">
+            <div class="main">
+
+                <div class="view grid-nosku">
+
+                    <!-- ✅ 渲染搜索结果 -->
+                    <div class="product" v-for="item in result" :key="item.title"
+                         style="display:inline-block;margin:10px;">
+                        <div class="product-iWrap">
+                            <div class="productImg-wrap">
+                                <a class="productImg">
+                                    <img :src="item.imgUrl" alt="商品图片" style="width:180px;height:180px;">
+                                </a>
+                            </div>
+                            <p class="productPrice">
+                                <em><b>¥</b>{{ item.price.toFixed(2) }}</em>
+                            </p>
+                            <p class="productTitle">
+                                <a>{{ item.title }}</a>
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- ✅ 无数据提示 -->
+                    <div v-if="!loading && result.length === 0" style="padding:20px;color:#666;">
+                        暂无搜索结果，请输入关键词搜索。
+                    </div>
+
+                    <!-- ✅ 加载中提示 -->
+                    <div v-if="loading" style="padding:20px;color:#999;">
+                        正在加载中...
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- ✅ Vue 逻辑 -->
+<script>
+    new Vue({
+        el: '#app',
+        data: {
+            keyword: '',
+            result: [],
+            loading: false,
+            pageNo: 1,
+            pageSize: 20
+        },
+        methods: {
+            searchKey() {
+                if (!this.keyword.trim()) {
+                    alert("请输入关键词！");
+                    return;
+                }
+                this.loading = true;
+                this.result = [];
+                axios.get(`http://localhost:9090/search/${this.keyword}/${this.pageNo}/${this.pageSize}`)
+                    .then(res => {
+                        this.result = res.data;
+                    })
+                    .catch(err => {
+                        console.error("搜索出错：", err);
+                        alert("搜索失败，请查看控制台日志。");
+                    })
+                    .finally(() => {
+                        this.loading = false;
+                    });
+            }
+        }
+    });
+</script>
+
+</body>
+</html>

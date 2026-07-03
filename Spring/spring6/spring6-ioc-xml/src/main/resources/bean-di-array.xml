@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+   <bean id="dept" class="com.bistu.spring6iocxml.di.dept">
+       <property name="name" value="财务部"></property>
+   </bean>
+    <bean id="emp" class="com.bistu.spring6iocxml.di.emp">
+        <property name="name" value="张三"></property>
+        <property name="age" value="23"></property>
+        <property name="dept" ref="dept"></property>
+<!--        数组类型注入-->
+        <property name="hobby">
+            <array>
+                <value>抽烟</value>
+                <value>喝酒</value>
+                <value>烫头</value>
+            </array>
+        </property>
+    </bean>
+</beans>

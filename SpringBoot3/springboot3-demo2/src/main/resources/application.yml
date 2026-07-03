@@ -1,0 +1,26 @@
+person:
+  name: zhangsan
+  age: 18
+  birth-day: 2000/1/1 12:12:12
+  like: true
+  child:
+    name: lisi
+    age: 10
+    birthDay: 2008/12/12
+    #text: ["abc,def"]
+    text:
+      - abc
+      - def
+
+  dogs:
+    - name: xiaohei
+      age: 3
+    - name: xiaobai
+      age: 2
+  cats:
+    c1:
+      name: lihua
+      age: 5
+    c2:
+      name: daju
+      age: 4

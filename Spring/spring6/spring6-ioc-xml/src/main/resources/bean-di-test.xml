@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+    <!--    对象类型依赖注入-->
+    <bean id="dept" class="com.bistu.spring6iocxml.di.dept">
+        <property name="name" value="研发部"></property>
+    </bean>
+    <bean id="emp" class="com.bistu.spring6iocxml.di.emp">
+        <property name="name" value="老王"></property>
+        <property name="age" value="35"></property>
+        <!--        1.引入外部bean-->
+        <property name="dept" ref="dept">
+        </property>
+    </bean>
+
+
+    <bean id="emp2" class="com.bistu.spring6iocxml.di.emp">
+        <property name="name" value="老冯"></property>
+        <property name="age" value="50"></property>
+        <!--        2.定义内部bean-->
+        <property name="dept">
+            <bean id="dept" class="com.bistu.spring6iocxml.di.dept">
+                <property name="name" value="人事部"></property>
+            </bean>
+        </property>
+
+    </bean>
+</beans>

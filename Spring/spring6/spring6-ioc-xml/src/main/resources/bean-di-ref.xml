@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:util="http://www.springframework.org/schema/util"
+       xmlns:p="http://www.springframework.org/schema/p"
+       xsi:schemaLocation="http://www.springframework.org/schema/util
+       http://www.springframework.org/schema/util/spring-util.xsd
+       http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <bean id="lesson1" class="com.bistu.spring6iocxml.di.Lesson">
+        <property name="lname" value="企业级计算基础"></property>
+    </bean>
+    <bean id="lesson2" class="com.bistu.spring6iocxml.di.Lesson">
+        <property name="lname" value="ssm框架"></property>
+    </bean>
+
+    <bean id="teacher1" class="com.bistu.spring6iocxml.di.Teacher">
+        <property name="tid" value="001"></property>
+        <property name="tname" value="尚硅谷"></property>
+    </bean>
+    <bean id="teacher2" class="com.bistu.spring6iocxml.di.Teacher">
+        <property name="tid" value="002"></property>
+        <property name="tname" value="李宝安"></property>
+    </bean>
+    <util:list id="lessonList">
+        <ref bean="lesson1"></ref>
+        <ref bean="lesson2"></ref>
+    </util:list>
+
+    <util:map id="teacherMap">
+        <entry>
+            <key>
+                <value>10001</value>
+            </key>
+            <ref bean="teacher1"></ref>
+        </entry>
+        <entry>
+            <key>
+                <value>10086</value>
+            </key>
+            <ref bean="teacher2"></ref>
+        </entry>
+    </util:map>
+    <bean id="student" class="com.bistu.spring6iocxml.di.Student">
+        <property name="sid" value="1111"></property>
+        <property name="sname" value="张三"></property>
+        <property name="lessonList" ref="lessonList"></property>
+        <property name="teacherMap" ref="teacherMap"></property>
+    </bean>
+</beans>
+

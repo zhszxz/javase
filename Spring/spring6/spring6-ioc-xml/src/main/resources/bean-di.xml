@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+    <!--依赖注入，setter方式-->
+    <bean id="book" class="com.bistu.spring6iocxml.di.book">
+        <!--        字面量-->
+        <property name="name" value="Spring"></property>
+        <property name="auhor" value="尚硅谷"></property>
+        <!--        空值-->
+        <property name="price">
+            <null></null>
+        </property>
+        <!--        特殊符号<>进行转义-->
+        <!--        <property name="" value="&lt;&gt;"></property>-->
+
+    </bean>
+
+    <bean id="bookcon" class="com.bistu.spring6iocxml.di.book">
+        <constructor-arg name="name" value="编译原理"></constructor-arg>
+        <constructor-arg name="auhor" value="路人甲"></constructor-arg>
+        <constructor-arg name="price" value="33.3"></constructor-arg>
+    </bean>
+</beans>

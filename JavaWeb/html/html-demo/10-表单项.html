@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>表单项</title>
+</head>
+<body>
+<!--表单项
+input:表单项
+select:下拉列表
+textarea:文本域-->
+<form method="post">
+    <!--hidden:隐藏域 name,value:将会以键值对形式提交-->
+    <input type="hidden" name="id" value="123">
+    <!--label:使"用户名"和input产生关联,通过for和id属性-->
+    <label for="username">用户名</label>
+    <!--文本框-->
+    <input type="text" name="username" id="username"><br>
+    <!--密码框-->
+    <label for="password">密码</label>
+    <input type="password" name="password" id="password"><br>
+    <!--单选框:需要name属性相同-->
+    <input type="radio" name="gender" value="男" id="male"><label for="male">男</label>
+    <input type="radio" name="gender" value="女" id="female"><label for="female">女</label><br>
+    <!--复选框-->
+    <input type="checkbox" name="hobby" value="1">旅游
+    <input type="checkbox" name="hobby" value="2">电影
+    <input type="checkbox" name="hobby" value="3">运动
+    <input type="checkbox" name="hobby" value="4">游戏
+    <input type="checkbox" name="hobby" value="5">睡觉<br>
+    <!--文件-->
+    头像<input type="file"><br>
+    <!--下拉列表-->
+    <select name="city">
+        <!--列表项-->
+        <option value="beijing">北京</option>
+        <option>上海</option>
+        <option>深圳</option>
+    </select><br>
+    <!--文本域-->
+    <textarea rows="10" cols="50" name="desc"></textarea><br>
+    <!--提交按钮-->
+    <input type="submit" value="注册">
+    <!--重置按钮-->
+    <input type="reset" value="重置">
+    <!--按钮,暂时没有效果-->
+    <input type="button" value="一个按钮">
+
+</form>
+
+</body>
+</html>

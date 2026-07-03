@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h1>首页</h1>
+<a th:href="@{/hello/testRequestMapping}">测试RequestMapping注解的位置</a><br>
+<a th:href="@{/hello/testRequestMapping}">测试RequestMapping注解的value属性--多值匹配1</a><br>
+<a th:href="@{/hello/test}">测试RequestMapping注解的value属性--多值匹配2</a><br>
+<a th:href="@{/hello/test}">测试RequestMapping注解的method属性--GET</a><br>
+<form th:action="@{/hello/test}" method="post">
+    <input type="submit" value="测试method属性--post请求">
+</form>
+<br>
+<a th:href="@{/hello/testGetMapping}">测试GetMapping注解--请求路径testGetMapping</a><br>
+<a th:href="@{/hello/testParams(username='zhangsan',password=123456)}">测试RequestMapping注解的params属性--请求路径testParams</a><br>
+<a th:href="@{/hello/aaa/testAnt}">测试RequestMapping注解的value属性模糊匹配--?匹配单个任意字符</a><br>
+<a th:href="@{/hello/aaa/testAnt}">测试RequestMapping注解的value属性模糊匹配--*匹配0到多个任意字符</a><br>
+<a th:href="@{/hello/a/a/testAnt}">测试RequestMapping注解的value属性模糊匹配--**匹配多级目录</a><br>
+<a th:href="@{/hello/testPath/1/zhangsan/123123}">测试RequestMapping注解的restful风格的传参方式</a><br>
+
+</body>
+</html>

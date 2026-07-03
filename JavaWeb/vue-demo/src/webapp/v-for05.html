@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div id="app">
+    <div v-for="addr in addrs">
+        {{addr}}<br>
+    </div>
+    <hr>
+    <div v-for="(addr,i) in addrs">
+        {{i+1}}--{{addr}}<br>
+    </div>
+</div>
+
+<script src="js/vue.js"></script>
+<script>
+    new Vue({
+        el:"#app",
+        data:function (){
+            return{
+                username:"",
+                addrs:["北京","上海","西安"]
+            }
+        }
+    });
+</script>
+</body>
+</html>

@@ -1,0 +1,23 @@
+logging:
+  pattern:
+    dateformat: MM-dd HH:mm:ss:SSS
+  level:
+    com.itheima: debug
+spring:
+  rabbitmq:
+    host: 192.168.124.40
+    port: 5672
+    virtual-host: /hmall
+    username: hmall
+    password: 739627
+
+    connection-timeout: 1s #生产者连接MQ的超时时间
+    template:
+      retry:
+        enabled: true #开启超时重试
+        initial-interval: 200ms #连接失败的初始等待时间
+        multiplier: 1 #失败后下次等待时间的倍数，1表示每次失败等待的时间等长
+        max-attempts: 3 #最大重试次数
+
+    publisher-confirm-type: none #开启Publisher Confirm:生产者发送消息时的确认机制，none表示不开启、correlated表示异步回调方式返回回执消息、simple表示同步阻塞等待回执消息
+    publisher-returns: false #开启Publisher Return

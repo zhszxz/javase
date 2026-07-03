@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+    <bean id="teacher1" class="com.bistu.spring6iocxml.di.Teacher">
+        <property name="tid" value="001"></property>
+        <property name="tname" value="黑马阿伟"></property>
+    </bean>
+
+    <bean id="teacher2" class="com.bistu.spring6iocxml.di.Teacher">
+        <property name="tid" value="002"></property>
+        <property name="tname" value="尚硅谷老王"></property>
+    </bean>
+
+    <bean id="student" class="com.bistu.spring6iocxml.di.Student">
+        <property name="sid" value="5408"></property>
+        <property name="sname" value="重庆狼"></property>
+        <!--        注入map集合-->
+        <property name="teacherMap">
+            <map>
+                <entry>
+                    <key>
+                        <value>
+                            100
+                        </value>
+                    </key>
+                    <ref bean="teacher1"></ref>
+                </entry>
+
+                <entry>
+                    <key>
+                        <value>
+                            200
+                        </value>
+                    </key>
+                    <ref bean="teacher2"></ref>
+                </entry>
+            </map>
+        </property>
+    </bean>
+</beans>

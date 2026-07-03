@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>表格</title>
+</head>
+<body>
+<!--border:设置边框  cellspacing：边框间隙-->
+<table border="1" cellspacing="0" width="500">
+    <!-- 定义行-->
+    <tr align="center">
+        <!-- 定义表头项-->
+        <th>序号</th>
+        <th>logo</th>
+        <th>品牌名称</th>
+        <th>企业名称</th>
+    </tr>
+    <tr align="center">
+        <!-- 定义普通项-->
+        <td>001</td>
+        <td><img src="img/三只松鼠.png" width="60" height="50"></td>
+        <td>三只松鼠</td>
+        <td>三只松鼠</td>
+    </tr>
+    <tr align="center">
+        <td>002</td>
+        <td><img src="img/优衣库.png" width="60" height="50"></td>
+        <td>优衣库</td>
+        <td>优衣库</td>
+    </tr>
+    <tr align="center">
+        <td>003</td>
+        <td><img src="img/小米.png" width="60" height="50"></td>
+        <td>小米</td>
+        <td>小米科技有限公司</td>
+    </tr>
+</table>
+<br>
+<hr>
+<br>
+<table border="1" cellspacing="0" width="500">
+    <tr align="center">
+        <!--横跨的列数-->
+        <th colspan="2">logo</th>
+        <th>品牌名称</th>
+        <th>企业名称</th>
+    </tr>
+    <tr align="center">
+        <td>001</td>
+        <td><img src="img/三只松鼠.png" width="60" height="50"></td>
+        <td>三只松鼠</td>
+        <td>三只松鼠</td>
+    </tr>
+    <tr align="center">
+        <!--横跨的行数-->
+        <td rowspan="2">002</td>
+        <td><img src="img/优衣库.png" width="60" height="50"></td>
+        <td>优衣库</td>
+        <td>优衣库</td>
+    </tr>
+    <tr align="center">
+        <td><img src="img/小米.png" width="60" height="50"></td>
+        <td>小米</td>
+        <td>小米科技有限公司</td>
+    </tr>
+</table>
+</body>
+</html>
